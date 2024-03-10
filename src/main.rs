@@ -4,20 +4,25 @@ mod camera;
 mod collision_detection;
 mod debug;
 mod despawn;
+mod health;
 mod movement;
 mod schedule;
 mod spaceship;
+mod state;
+
+use bevy::prelude::*;
 
 use asset_loader::AssetLoaderPlugin;
 use asteroids::AsteroidPlugin;
-use bevy::prelude::*;
 use camera::CameraPlugin;
 use collision_detection::CollisionDetectionPlugin;
+#[allow(unused_imports)]
 use debug::DebugPlugin;
 use despawn::DespawnPlugin;
 use movement::MovementPlugin;
 use schedule::SchedulePlugin;
 use spaceship::SpaceshipPlugin;
+use state::StatePlugin;
 
 fn main() {
     App::new()
@@ -28,7 +33,7 @@ fn main() {
             brightness: 1000.0,
         })
         .add_plugins(DefaultPlugins)
-        // User configured plugins.
+        // User defined plugins.
         .add_plugins(AssetLoaderPlugin)
         .add_plugins(MovementPlugin)
         .add_plugins(SpaceshipPlugin)
@@ -37,6 +42,7 @@ fn main() {
         .add_plugins(CollisionDetectionPlugin)
         .add_plugins(DespawnPlugin)
         .add_plugins(SchedulePlugin)
-        //.add_plugins(DebugPluginwwwwwwwww)
+        .add_plugins(StatePlugin)
+        // .add_plugins(DebugPlugin)
         .run();
 }
